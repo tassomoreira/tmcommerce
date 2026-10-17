@@ -3,6 +3,8 @@ package com.tassomoreira.tmcommerce.entities;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -14,15 +16,17 @@ public class User {
     private UUID id;
     private String name;
     private String email;
-    private String  phone;
+    private String phone;
     private LocalDate birthDate;
     private String password;
+
+    @OneToMany(mappedBy = "client")
+    private final List<Order> orders = new ArrayList<>();
 
     public User() {
     }
 
-    public User(UUID id, String name, String email, String phone, LocalDate birthDate, String password) {
-        this.id = id;
+    public User(String name, String email, String phone, LocalDate birthDate, String password) {
         this.name = name;
         this.email = email;
         this.phone = phone;
@@ -32,10 +36,6 @@ public class User {
 
     public UUID getId() {
         return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -76,5 +76,9 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
     }
 }
