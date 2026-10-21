@@ -14,8 +14,12 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+
     private String name;
+
+    @Column(unique = true)
     private String email;
+
     private String phone;
     private LocalDate birthDate;
     private String password;
